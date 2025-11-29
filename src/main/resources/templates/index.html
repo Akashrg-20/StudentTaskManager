@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+    <div class="home">
+
+        <div class="nav">
+            <h1>student task manager</h1>
+            <span class="right">
+                <form th:action="@{/search}" method=get>
+                    <input type="search" name="keyword" placeholder="Search by name,course,year,section">
+                </form>
+                <a th:href="@{/add-student}">add student</a>
+            </span>
+        </div>
+
+
+
+    <div class="main">
+        <div class="card" th:each="student:${students}">
+            <img src="css/img/1.jpg" alt="student-photo">
+            <div class="content">
+
+                <ul class="q">
+                    <li>name</li>
+                    <li>Dob</li>
+                    <li>course</li>
+                    <li>year</li>
+                    <li>sec</li>
+                    <li>phone</li>
+                </ul>
+
+                <ul class="sep">
+                    <li>:</li>
+                    <li>:</li>
+                    <li>:</li>
+                    <li>:</li>
+                    <li>:</li>
+                    <li>:</li>
+                </ul>
+
+                <ul class="ans">
+                    <li th:text="${student.name}"></li>
+                    <li th:text="${student.dob}"></li>
+                    <li th:text="${student.course.course}"></li>
+                    <li th:text="${student.year.year}"></li>
+                    <li th:text="${student.section.section}"></li>
+                    <li th:text="${student.phone}"></li>
+                </ul>
+            </div>
+
+            <div class="btn">
+                <a class="edit" th:href="@{edit-student/{id}(id=${student.id})}">Edit</a>
+                <a class="delete" th:href="@{delete-student/{id}(id=${student.id})}">Delete</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

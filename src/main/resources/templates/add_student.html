@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="form">
+        <div class="title">Add student</div>
+
+        <form th:action="@{/save-student}" method="POST" th:object="${student}">
+            <input type="hidden" th:field="*{id}"/>
+
+            <input type="text" placeholder="Name" th:field="*{name}" required />
+            <span th:if="${#fields.hasErrors('name')}">
+                <br>
+                <span class="error" th:errors="*{name}"></span>
+            </span>
+            <br><br>
+
+            <input type="date" placeholder="Date of birth" th:field="*{dob}" required/>
+            <span th:if="${#fields.hasErrors('dob')}">
+                <br>
+                <span class="error" th:errors="*{dob}"></span>
+            </span>
+
+            <br><br>
+
+            <select th:field="*{course}" required>
+                <option value="">Select Course</option>
+                <option th:each="c:${courses}" th:value="${c.id}" th:text="${c.course}"></option>
+            </select>
+            <div class="error" th:if="${#fields.hasErrors('course')}"
+              th:errors="*{course}"> </div>
+            <br><br>
+
+            <select th:field="*{year}" required>
+                <option value="">Select Year</option>
+                <option th:each="y:${years}" th:value="${y.id}" th:text="${y.year}"></option>
+            </select>
+            <div class="error" th:if="${#fields.hasErrors('year')}"
+              th:errors="*{year}"> </div>
+
+            <br><br>
+
+            <select  th:field="*{section}" required>
+                <option value="">Select Section</option>
+                <option th:each="s:${sections}" th:value="${s.id}" th:text="${s.section}"></option>
+            </select>
+            <div class="error" th:if="${#fields.hasErrors('section')}"
+              th:errors="*{section}"> </div>
+            <br><br>
+
+            <input type="number" minlength="10" maxlength="10"  placeholder="Phone number" th:field="*{phone}" required>
+            <div class="error" th:if="${#fields.hasErrors('phone')}"
+              th:errors="*{phone}"> </div>
+            <br><br>
+
+            <button >Save</button>
+
+        </form>
+
+    </div>
+</body>
+
+</html>
